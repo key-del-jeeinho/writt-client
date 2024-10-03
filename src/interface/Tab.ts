@@ -1,11 +1,9 @@
-import { DateTime } from "luxon";
+import { z } from "zod";
 
-export interface Tab {
-    id: string;
-    name: string;
-    ext: string;
-    description: string;
-    content: string;
-    createdAt: DateTime;
-    lastModifiedAt: DateTime;
-}
+export const TabScheme = z.object({
+    id: z.string().uuid(),
+    name: z.string(),
+    ext: z.string(),
+})
+
+export type Tab = z.infer<typeof TabScheme>;

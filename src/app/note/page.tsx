@@ -42,13 +42,10 @@ const tabs: Tab[] = fileContents.map(content => ({
   id: content.id,
   name: content.name,
   ext: content.ext,
-  content: content.content,
-  description: content.description,
-  createdAt: content.createdAt,
-  lastModifiedAt: content.lastModifiedAt,
 }))
 
 const activeTab = tabs[0];
+const content = fileContents[0];
 const deactiveTabs = tabs.slice(1);
 
 export default function NotePage() {
@@ -58,7 +55,7 @@ export default function NotePage() {
         
         <div className="w-full flex flex-col">
           <TopBar activeTab={activeTab} deactiveTabs={deactiveTabs} />
-          <ContentSpace activeTab={activeTab} />
+          <ContentSpace content={content} />
         </div>
       </div>
     );
