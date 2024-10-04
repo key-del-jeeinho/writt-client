@@ -1,5 +1,6 @@
 import { File } from "@/interface/File";
 import { useMemo } from "react";
+import Editor from "./Editor";
 
 interface IProps {
   content: File;
@@ -20,8 +21,7 @@ export default function ContentSpace({ content }: IProps) {
                 <span className="text-sm text-zinc-500">{createdAt} - {lastModifiedAt}</span>
               </div>
               <div className="pt-6"/>
-                <div dangerouslySetInnerHTML={ {__html: content.content} }>
-                </div>
+                <Editor content={content.content}></Editor>
               <div className="mt-4"></div>
               <div>
               </div>
