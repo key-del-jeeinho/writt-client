@@ -1,6 +1,5 @@
-import EditorView from "@/components/EditorView";
 import LeftBar from "@/components/LeftBar";
-import TopBar from "@/components/TopBar";
+import Window from "@/components/Window";
 import { File, FileScheme } from "@/interface/File";
 import { FileSet } from "@/interface/FileSet";
 import { Tab } from "@/interface/Tab";
@@ -45,18 +44,18 @@ const tabs: Tab[] = filesIn1depth.map(content => ({
 }))
 
 const activeTab = tabs[0];
-const file = filesIn1depth[0];
+const activeFile = filesIn1depth[0];
 const deactiveTabs = tabs.slice(1);
 
 export default function NotePage() {
     return (
       <div className="h-full w-full flex flex-row">
         <LeftBar contents={fileSet}/>
-        
-        <div className="w-full flex flex-col">
-          <TopBar activeTab={activeTab} deactiveTabs={deactiveTabs} />
-          <EditorView file={file} />
-        </div>
+        <Window
+          activeTab={activeTab} 
+          activeFile={activeFile} 
+          deactiveTabs={deactiveTabs}
+        />
       </div>
     );
   }
