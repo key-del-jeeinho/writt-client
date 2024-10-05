@@ -50,7 +50,7 @@ const deactiveTabs = tabs.slice(1);
 export default function NotePage() {
     return (
       <div className="h-full w-full flex flex-row">
-        <LeftBar contents={fileSet}/>
+        <LeftBar fileSets={fileSet}/>
         <Window
           activeTab={activeTab} 
           activeFile={activeFile} 
