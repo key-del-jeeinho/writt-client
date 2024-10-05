@@ -20,6 +20,10 @@ export default function Editor({ initialContent }: IProps) {
     immediatelyRender: false,
     extensions: [
       StarterKit,
+      Focus.configure({
+        className: 'focus outline-zinc-900 rounded outline outline-offset-8',
+        mode: 'deepest',
+      }),
     ],
     editorProps: {
       attributes: {
