@@ -1,6 +1,6 @@
 import { FolderIcon, SearchIcon, BookmarkIcon, PanelLeftClose } from "lucide-react";
 
-export default function IndexSpaceShortcuts() {
+export default function SpaceShortcuts() {
     return (
         <div className="h-12 mx-4 flex flex-row justify-between px-4 items-center flex-shrink-0 flex-grow-0">
             <div className="flex flex-row gap-4">

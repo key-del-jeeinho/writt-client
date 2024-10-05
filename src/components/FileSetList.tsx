@@ -1,34 +1,34 @@
 import { File } from "@/interface/File";
+import { FileSet } from "@/interface/FileSet";
 import { Folder } from "@/interface/Folder";
-import { Content } from "@/interface/Content";
 import { FolderIcon } from "lucide-react";
 
 
 interface IProps {
-    contents: Content[]
+    fileSets: FileSet[]
 }
 
-export default function IndexContents({ contents }: IProps) {
+export default function IndexFileSets({ fileSets }: IProps) {
     return (
         <ul className="structure-contents h-full mx-4 py-2 px-4 flex flex-col gap-2">
-            { contents.map(content => <ContentItem key={content.id} content={content} />) }
+            { fileSets.map(fileSet => <FileSetItem key={fileSet.id} fileSet={fileSet} />) }
         </ul>
     )
 }
 
-function ContentItem({ content }: { content: Content }) {
-    switch(content.type) {
-        case 'file': return FileContentItem(content)
-        case 'folder': return FolderContentItem(content)
+function FileSetItem({ fileSet }: { fileSet: FileSet }) {
+    switch(fileSet.type) {
+        case 'file': return FileItem(fileSet)
+        case 'folder': return FolderItem(fileSet)
         default: return null
     }
 }
 
-function FileContentItem(content: File) {
+function FileItem(content: File) {
     return (<li><div className="truncate">{content.name}.{content.ext}</div></li>)
 }
 
-function FolderContentItem(content: Folder) {
+function FolderItem(content: Folder) {
     return (
         <li>
             <div className="flex flex-row gap-2 items-center">

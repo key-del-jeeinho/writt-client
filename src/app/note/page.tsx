@@ -1,13 +1,13 @@
-import ContentSpace from "@/components/ContentSpace";
+import EditorView from "@/components/EditorView";
 import LeftBar from "@/components/LeftBar";
 import TopBar from "@/components/TopBar";
 import { File, FileScheme } from "@/interface/File";
-import { Content } from "@/interface/Content";
+import { FileSet } from "@/interface/FileSet";
 import { Tab } from "@/interface/Tab";
 import { DateTime } from "luxon";
 import { v4 as uuid } from "uuid";
 
-const contents: Content[] = [
+const fileSet: FileSet[] = [
   { 
     id: uuid(), 
     name: "직소",
@@ -34,28 +34,28 @@ const contents: Content[] = [
   { id: uuid(), name: "T.모어", type: 'folder' },
 ]
 
-const fileContents: File[] = contents
+const filesIn1depth: File[] = fileSet
   .filter(content => content.type === 'file')
   .map(file => FileScheme.parse(file));
 
-const tabs: Tab[] = fileContents.map(content => ({
+const tabs: Tab[] = filesIn1depth.map(content => ({
   id: content.id,
   name: content.name,
   ext: content.ext,
 }))
 
 const activeTab = tabs[0];
-const content = fileContents[0];
+const file = filesIn1depth[0];
 const deactiveTabs = tabs.slice(1);
 
 export default function NotePage() {
     return (
       <div className="h-full w-full flex flex-row">
-        <LeftBar contents={contents}/>
+        <LeftBar contents={fileSet}/>
         
         <div className="w-full flex flex-col">
           <TopBar activeTab={activeTab} deactiveTabs={deactiveTabs} />
-          <ContentSpace content={content} />
+          <EditorView file={file} />
         </div>
       </div>
     );
