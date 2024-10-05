@@ -1,24 +1,34 @@
 "use client"
 
-import { EditorContent, useEditor } from "@tiptap/react"
+import { EditorContent, JSONContent, useEditor } from "@tiptap/react"
+import Focus from '@tiptap/extension-focus'
 import StarterKit from "@tiptap/starter-kit"
+import { useEffect, useState } from "react"
 
 interface IProps {
-    content: string
+    initialContent: string
 }
 
-export default function Editor({ content }: IProps) {
-    const editor = useEditor({
-      extensions: [
-        StarterKit,
-      ],
-      editorProps: {
-        attributes: {
-          class: 'prose prose-zinc prose-base dark:prose-invert focus:outline-none',
-        },
+export default function Editor({ initialContent }: IProps) {
+  const [content, setContent] = useState<JSONContent>()
+
+  useEffect(() => {
+    console.log(content)
+  }, [content])
+
+  const editor = useEditor({
+    immediatelyRender: false,
+    extensions: [
+      StarterKit,
+    ],
+    editorProps: {
+      attributes: {
+        class: 'prose prose-zinc prose-base dark:prose-invert focus:outline-none',
       },
-      content: content,
-    })
-  
-    return <EditorContent editor={editor} />
+    },
+    content: initialContent,
+    onUpdate: ({ editor }) => setContent(editor.getJSON())
+  })
+
+  return <EditorContent editor={editor} />
 }
