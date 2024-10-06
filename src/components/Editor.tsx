@@ -5,17 +5,32 @@ import Focus from '@tiptap/extension-focus'
 import StarterKit from "@tiptap/starter-kit"
 import { useEffect, useState } from "react"
 import { Content, fromJSONContent } from "@/interface/Content"
+import * as _ from "lodash";
+import { UUID } from "crypto"
+import { ContentAPI } from "@/api/content.api"
 
 interface IProps {
-    initialContent: Content
+  fileId: UUID
+  initialContent: Content
 }
 
-export default function Editor({ initialContent }: IProps) {
-  const [content, setContent] = useState<Content>(initialContent)
+export default function Editor({ fileId, initialContent }: IProps) {
+  const [input, setInput] = useState<Content>(initialContent)
+
+  const [content, setContent] = useState(input);
+  const updateContent = _.debounce((value) => { setContent(value) }, 700);
 
   useEffect(() => {
-    console.log(content)
-  }, [content])
+    updateContent(input);
+    return () => { updateContent.cancel() };
+  }, [input, updateContent])
+
+  useEffect(() => {
+    async function updateContent() {
+      ContentAPI.updateContent(fileId, content)
+    }
+    updateContent()
+  }, [fileId, content])
 
   const editor = useEditor({
     immediatelyRender: false,
@@ -31,11 +46,11 @@ export default function Editor({ initialContent }: IProps) {
         class: 'prose prose-zinc prose-base dark:prose-invert focus:outline-none',
       },
     },
-    content: content,
+    content: input,
     onUpdate: ({ editor }) => {
       const jsonContent = editor.getJSON()
       const content = fromJSONContent(jsonContent)
-      setContent(content)
+      setInput(content)
     }
   })
 

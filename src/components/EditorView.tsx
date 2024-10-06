@@ -21,7 +21,7 @@ export default function EditorView({ file }: IProps) {
                 <span className="text-sm text-zinc-500">{createdAt} - {lastModifiedAt}</span>
               </div>
               <div className="pt-6"/>
-                <Editor initialContent={file.content}></Editor>
+                <Editor fileId={file.id} initialContent={file.content}></Editor>
               <div className="mt-4"></div>
               <div>
               </div>
