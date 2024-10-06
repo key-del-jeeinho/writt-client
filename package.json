@@ -15,6 +15,7 @@
     "@tiptap/pm": "^2.8.0",
     "@tiptap/react": "^2.8.0",
     "@tiptap/starter-kit": "^2.8.0",
+    "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lodash": "^4.17.21",
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
+    "@types/axios": "^0.14.0",
     "@types/lodash": "^4.17.10",
     "@types/luxon": "^3.4.2",
     "@types/node": "^20",
