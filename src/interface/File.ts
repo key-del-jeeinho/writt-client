@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
 import { z } from "zod";
+import { ContentSchema } from "./Content";
 
 const dateTimeSchema = z.custom<DateTime>(
     (value) => DateTime.isDateTime(value),
@@ -11,7 +12,7 @@ export const FileScheme = z.object({
     name: z.string(),
     ext: z.string(),
     description: z.string(),
-    content: z.string(),
+    content: ContentSchema,
     createdAt: dateTimeSchema,
     lastModifiedAt: dateTimeSchema,
 });
