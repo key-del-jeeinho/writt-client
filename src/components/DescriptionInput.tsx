@@ -14,7 +14,7 @@ export default function DescriptionInput({ file }: IProps) {
   const { 
     raw: [input, setInput], 
     debounced: [description],
-  } = useDebounceState(file.name, 500)
+  } = useDebounceState(file.description, 500)
 
   useEffect(() => {
     ContentAPI.updateDescription(file.id, description)
