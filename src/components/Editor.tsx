@@ -3,11 +3,12 @@
 import { EditorContent, useEditor } from "@tiptap/react"
 import Focus from '@tiptap/extension-focus'
 import StarterKit from "@tiptap/starter-kit"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { Content, fromJSONContent } from "@/interface/Content"
 import * as _ from "lodash";
 import { UUID } from "crypto"
 import { ContentAPI } from "@/api/content.api"
+import { useDebounceState } from "@/hook/useDebounceState"
 
 interface IProps {
   fileId: UUID
@@ -15,15 +16,10 @@ interface IProps {
 }
 
 export default function Editor({ fileId, initialContent }: IProps) {
-  const [input, setInput] = useState<Content>(initialContent)
-
-  const [content, setContent] = useState(input);
-  const updateContent = _.debounce((value) => { setContent(value) }, 700);
-
-  useEffect(() => {
-    updateContent(input);
-    return () => { updateContent.cancel() };
-  }, [input, updateContent])
+  const {
+    raw: [input, setInput],
+    debounced: [content],
+  } = useDebounceState(initialContent, 500)
 
   useEffect(() => {
     ContentAPI.updateContent(fileId, content)
