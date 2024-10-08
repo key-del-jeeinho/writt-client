@@ -26,10 +26,7 @@ export default function Editor({ fileId, initialContent }: IProps) {
   }, [input, updateContent])
 
   useEffect(() => {
-    async function updateContent() {
-      ContentAPI.updateContent(fileId, content)
-    }
-    updateContent()
+    ContentAPI.updateContent(fileId, content)
   }, [fileId, content])
 
   const editor = useEditor({
