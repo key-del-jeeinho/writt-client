@@ -8,4 +8,18 @@ export class ContentAPI {
     ) {
         console.log('save file', fileId, content)
     }
+
+    static async updateDescription(
+        fileId: UUID,
+        description: string,
+    ) {
+        console.log('save description', fileId, description)
+    }
+
+    static async updateName(
+        fileId: UUID,
+        name: string,
+    ) {
+        console.log('save name', fileId, name)
+    }
 }
