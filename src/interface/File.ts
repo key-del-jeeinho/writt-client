@@ -25,3 +25,11 @@ export const FileScheme = z.object({
 });
 
 export type File = z.infer<typeof FileScheme>;
+
+export const FileMetaScheme = FileScheme.pick({
+  id: true,
+  name: true,
+  ext: true,
+})
+
+export type FileMeta = z.infer<typeof FileMetaScheme>

@@ -6,3 +6,10 @@ export const FolderScheme = z.object({
 });
 
 export type Folder = z.infer<typeof FolderScheme>;
+
+export const FolderMetaScheme = FolderScheme.pick({
+    id: true,
+    name: true,
+})
+
+export type FolderMeta = z.infer<typeof FolderMetaScheme>
