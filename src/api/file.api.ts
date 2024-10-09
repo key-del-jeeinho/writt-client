@@ -1,7 +1,14 @@
 import { Content } from "@/interface/Content";
+import { File } from "@/interface/File";
 import { UUID } from "crypto";
 
-export class ContentAPI {
+export class FileAPI {
+    static async findById(fileId: UUID): Promise<File | undefined> {
+        //TODO 
+        console.log(`query file - id: ${fileId}`)
+        return undefined;
+    }
+
     static async updateContent(
         fileId: UUID,
         content: Content,

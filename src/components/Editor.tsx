@@ -7,7 +7,7 @@ import { useEffect } from "react"
 import { Content, fromJSONContent } from "@/interface/Content"
 import * as _ from "lodash";
 import { UUID } from "crypto"
-import { ContentAPI } from "@/api/content.api"
+import { FileAPI } from "@/api/file.api"
 import { useDebounceState } from "@/hook/useDebounceState"
 
 interface IProps {
@@ -22,7 +22,7 @@ export default function Editor({ fileId, initialContent }: IProps) {
   } = useDebounceState(initialContent, 500)
 
   useEffect(() => {
-    ContentAPI.updateContent(fileId, content)
+    FileAPI.updateContent(fileId, content)
   }, [fileId, content])
 
   const editor = useEditor({

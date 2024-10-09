@@ -4,7 +4,7 @@ import { Input } from "./ui/input";
 import { File } from "@/interface/File";
 import { useDebounceState } from "@/hook/useDebounceState";
 import { useEffect } from "react";
-import { ContentAPI } from "@/api/content.api";
+import { FileAPI } from "@/api/file.api";
 
 interface IProps {
     file: File
@@ -17,7 +17,7 @@ export default function DescriptionInput({ file }: IProps) {
   } = useDebounceState(file.description, 500)
 
   useEffect(() => {
-    ContentAPI.updateDescription(file.id, description)
+    FileAPI.updateDescription(file.id, description)
   }, [file.id, description])
 
   return (

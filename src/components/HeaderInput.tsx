@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { Input } from "./ui/input";
 import { File } from "@/interface/File";
-import { ContentAPI } from "@/api/content.api";
+import { FileAPI } from "@/api/file.api";
 import { useDebounceState } from "@/hook/useDebounceState";
 
 interface IProps {
@@ -17,7 +17,7 @@ export default function DescriptionInput({ file }: IProps) {
   } = useDebounceState(file.name, 500)
 
   useEffect(() => {
-    ContentAPI.updateName(file.id, name)
+    FileAPI.updateName(file.id, name)
   }, [file.id, name])
 
   return (<>
