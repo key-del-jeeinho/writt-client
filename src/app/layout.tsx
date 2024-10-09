@@ -10,7 +10,7 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Linte",
+  title: "Writt",
   description: "A Personal Note Application",
 };
 
