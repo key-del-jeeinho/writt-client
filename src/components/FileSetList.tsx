@@ -1,39 +1,42 @@
-import { File } from "@/interface/File";
-import { FileSet } from "@/interface/FileSet";
-import { Folder } from "@/interface/Folder";
+import { FileMeta } from "@/interface/File";
+import { FileSetMeta } from "@/interface/FileSet";
+import { FolderMeta } from "@/interface/Folder";
 import { FolderIcon } from "lucide-react";
 
 
 interface IProps {
-    fileSets: FileSet[]
+    fileSetMetaList: FileSetMeta[]
 }
 
-export default function IndexFileSets({ fileSets }: IProps) {
+export default function IndexFileSets({ fileSetMetaList }: IProps) {
     return (
         <ul className="structure-contents h-full mx-4 py-2 px-4 flex flex-col gap-2">
-            { fileSets.map(fileSet => <FileSetItem key={fileSet.id} fileSet={fileSet} />) }
+            { fileSetMetaList.map(fileSet => <FileSetItem key={fileSet.id} meta={fileSet} />) }
         </ul>
     )
 }
 
-function FileSetItem({ fileSet }: { fileSet: FileSet }) {
-    switch(fileSet.type) {
-        case 'file': return FileItem(fileSet)
-        case 'folder': return FolderItem(fileSet)
+interface ItemIProps { meta: FileSetMeta }
+function FileSetItem({ meta }: ItemIProps) {
+    switch(meta.type) {
+        case 'file': return <FileItem meta={meta}/>
+        case 'folder': return <FolderItem meta={meta}/>
         default: return null
     }
 }
 
-function FileItem(content: File) {
-    return (<li><div className="truncate">{content.name}.{content.ext}</div></li>)
+interface FileIProps { meta: FileMeta }
+function FileItem({ meta }: FileIProps) {
+    return (<li><div className="truncate">{meta.name}.{meta.ext}</div></li>)
 }
 
-function FolderItem(content: Folder) {
+interface FolderIProps { meta: FolderMeta }
+function FolderItem({ meta }: FolderIProps) {
     return (
         <li>
             <div className="flex flex-row gap-2 items-center">
                 <FolderIcon className="w-4 h-4" />
-                <span>{content.name}</span>
+                <span>{meta.name}</span>
             </div>
         </li>
     )
